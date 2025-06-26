@@ -142,7 +142,7 @@ path <- function(i,
                  l_log_kappa,
                  l_v) {
   paste0(
-    "Manuscript/Section_5/Prior_Posterior_Data/prior_posterior_plots_data_",
+    "Manuscript/Section_5/Prior_Posterior_Data/pppd_",
     names(log_priors)[i],
     "_n_kp=",
     n_points_log_kappa,
@@ -543,7 +543,7 @@ plt_kp_v_data_priors_posteriors(
 # # #   n_points_log_kappa = n_points_log_kappa,
 # # #   n_points_v = 4,
 # # #   path_data = paste0(
-# # #     "Simulation_results/prior_posterior_plots_data_log_kappa",
+# # #     "Simulation_results/pppd_log_kappa",
 # # #     n_points_log_kappa,
 # # #     ".rds"
 # # #   ),
