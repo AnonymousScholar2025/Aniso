@@ -234,7 +234,7 @@ LOO_pc <- LOO_CV_precipitation_loop(
     ".RData"
   ),
   path_prediction_txt = paste0(
-    "Manuscript/Section_6/Precip/Matlab/Prediction_on_mesh_sim/",
+    "Manuscript/Section_6/Precip/Matlab/PS/",
     simulation_type,
     "/prediction_on_mesh_pc_w=",
     n_weights,
@@ -269,7 +269,7 @@ LOO_EG <- LOO_CV_precipitation_loop(
     ".RData"
   ),
   path_prediction_txt = paste0(
-    "Manuscript/Section_6/Precip/Matlab/Prediction_on_mesh_sim/",
+    "Manuscript/Section_6/Precip/Matlab/PS/",
     simulation_type,
     "/prediction_on_mesh_EG_w=",
     n_weights,
@@ -302,7 +302,7 @@ LOO_iso <- LOO_CV_precipitation_loop(
     ".RData"
   ),
   path_prediction_txt = paste0(
-    "Manuscript/Section_6/Precip/Matlab/Prediction_on_mesh_sim/",
+    "Manuscript/Section_6/Precip/Matlab/PS/",
     simulation_type,
     "/prediction_on_mesh_iso_w=",
     n_weights,
