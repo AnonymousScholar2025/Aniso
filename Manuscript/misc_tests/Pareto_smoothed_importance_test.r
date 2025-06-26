@@ -7,7 +7,7 @@ library(sp)
 library(INLA)
 library(inlabru)
 library(loo)
-# document()#
+# #devtools::document(pkg = "package")#
 # Defining the random seed
 set.seed(123)
 

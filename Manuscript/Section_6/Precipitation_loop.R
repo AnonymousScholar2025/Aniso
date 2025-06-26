@@ -12,7 +12,7 @@ library(foreach)
 library(doParallel)
 library(scoringRules)
 library(progress)
-document()
+#devtools::document(pkg = "package")
 
 # Defines the upper bounds for the quantiles
 rho0 <- 10 # Controls the size of kappa in PC and non PC priors

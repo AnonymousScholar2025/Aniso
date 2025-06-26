@@ -1,17 +1,18 @@
 # In this file we plot the prior on kappa and v for given values
 # of the flexibility parameters lambda, lambda1
-library(devtools)
 library(ggplot2)
-library(latex2exp)
-library(devtools)
 library(tidyr)
 library(dplyr)
 library(patchwork)
-document()
+if (!requireNamespace("latex2exp", quietly = TRUE)) {
+  install.packages("latex2exp")
+}
+library(latex2exp)
+#devtools::document(pkg = "package")
 lambda <- 0.1
 lambda1 <- 0.1
 
-plt_pc_prior_kappa_v(lambda, lambda1, n_points = 600, path = "Manuscript/Simulation_images/Priors/PC_prior_kappa_v.pdf", txt_size = 20)
+plt_pc_prior_kappa_v(lambda, lambda1, n_points = 60, path = "Manuscript/Simulation_images/Priors/PC_prior_kappa_v.pdf", txt_size = 20)
 
 
 PC_prior_log_kappa(1, lambda, lambda1)

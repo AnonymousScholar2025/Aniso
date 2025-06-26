@@ -355,6 +355,7 @@ plt_u_sample <- function(mesh,
 #' @param path A character string of the path to save the plot
 #' @param titles A character vector of titles for each plot
 #' @param n_col An integer of the number of columns for the facet wrap
+#' @export
 
 plt_covariance_of_u <- function(mesh,
                                 boundary = NULL,

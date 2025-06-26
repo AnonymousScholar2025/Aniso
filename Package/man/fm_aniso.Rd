@@ -19,7 +19,7 @@ fm_aniso_basis_weights_sample(x, aniso, n = 1, log_sigma = 0)
 \item{aniso}{List \verb{[kappa,vec]} where \code{kappa} controls the (inverse) correlation range
 and (the half angle version of) \code{vec} controls the main directions of the anisotropy.}
 
-\item{log_sigma}{The logarithmm of the marginal variance sigma (is a constant)}
+\item{log_sigma}{The logarithm of the marginal variance sigma (is a constant)}
 
 \item{n}{Number of samples (default=1).}
 

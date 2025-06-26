@@ -12,7 +12,7 @@ library(foreach)
 library(doParallel)
 library(scoringRules)
 library(progress)
-document()
+#devtools::document(pkg = "package")
 
 # # Get height first time
 # observations_height <- getHeight(observation_locations)$hCov

@@ -1,6 +1,6 @@
 library(devtools)
 library(ggplot2)
-document()
+#devtools::document(pkg = "package")
 # PARAMETER VALUES NONSTATIONARY
 kp <- 1
 v1 <- 0

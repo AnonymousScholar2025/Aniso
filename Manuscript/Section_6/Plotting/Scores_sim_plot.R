@@ -1,7 +1,7 @@
 library(ggplot2)
 library(patchwork)
 library(devtools)
-document()
+#devtools::document(pkg = "package")
 
 # Inspect parameters used for data generation ---------------
 LOO_pc <- readRDS("Manuscript/Section_6/Precip/Results/LOO_pc_20000.RData")

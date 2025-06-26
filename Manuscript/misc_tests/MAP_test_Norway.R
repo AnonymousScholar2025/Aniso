@@ -11,7 +11,7 @@ library(foreach)
 library(doParallel)
 library(scoringRules)
 library(progress)
-document()
+#devtools::document(pkg = "package")
 
 
 # Definition of priors ----------------------------------------------------

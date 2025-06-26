@@ -3,10 +3,9 @@
 # We do this by obtaining the precision associated to the FEM method of the SPDE.
 # The covariance can then be used by interpolating the covariance function at the points of interest
 # The simulations are obtained using a Cholesky decomposition of the precision matrix
-library(devtools)
+library(SPDEaniso)
 library(ggplot2)
 library(sf)
-document()
 
 # Mesh definition ---------------------------------------------------------
 kp <- 1

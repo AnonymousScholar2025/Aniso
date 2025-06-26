@@ -11,7 +11,7 @@ library(dplyr)
 library(tidyr)
 library(loo)
 library(progress)
-document()
+#devtools::document(pkg = "package")
 
 # Defining the random seed
 set.seed(123)

@@ -10,7 +10,8 @@ Depends:
 Imports:
     lifecycle,
     Matrix,
-    stats
+    stats,
+    INLA
 Suggests:
     ggplot2,
     inlabru (>= 2.8.0),
@@ -22,7 +23,7 @@ Suggests:
 Remotes: inlabru-org/fmesher@feature/anisotropy
 License: MPL-2.0
 NeedsCompilation: no
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

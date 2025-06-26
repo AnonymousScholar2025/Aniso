@@ -10,7 +10,7 @@ library(purrr)
 library(sf)
 library(patchwork)
 library(latex2exp)
-document()
+#devtools::document(pkg = "package")
 
 
 # Hyperparameters on priors -----------------------------------------------

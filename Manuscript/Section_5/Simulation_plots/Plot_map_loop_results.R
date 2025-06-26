@@ -9,7 +9,7 @@ library(patchwork)
 library(latex2exp)
 library(xtable)
 
-document()
+#devtools::document(pkg = "package")
 
 prior_types <- list(
   pc = "pc",

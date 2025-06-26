@@ -11,7 +11,7 @@ library(dplyr)
 library(tidyr)
 library(loo)
 library(sf)
-# document()#
+# #devtools::document(pkg = "package")#
 
 load("Precipitation/data.RData")
 # locations are data$x, data$y we turn into a matrix

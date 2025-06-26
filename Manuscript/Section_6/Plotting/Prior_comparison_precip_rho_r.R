@@ -6,7 +6,7 @@ library(devtools)
 library(tidyr)
 library(dplyr)
 library(patchwork)
-document()
+#devtools::document(pkg = "package")
 # Plot of prior on kappa
 rho0 <- 10 # Controls the size of kappa
 a0 <- 10 # Controls the size of v

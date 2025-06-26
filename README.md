@@ -32,9 +32,10 @@ git clone [https://github.com/AnonymousScholar2025/Aniso.git](https://github.com
 
 All subsequent commands should be run within an R session started from the root of the cloned `Aniso` directory.
 
-The full installation may take 5-15 minutes, as `devtools` has many of its own dependencies.
+Once your R session is running in the correct directory, run the following commands in order. The full installation may take 5-20 minutes, as `devtools` and `INLA` are large packages.
 
 ```r
+# Step A: Install prerequisite packages
 # The installation process requires 'devtools', and 'remotes' is used to install from GitHub.
 if (!requireNamespace("remotes", quietly = TRUE)) {
   install.packages("remotes")
@@ -43,8 +44,13 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
 
-# Install the 'SPDEaniso' package from the 'package/' subdirectory in this repository.
-remotes::install_github("AnonymousScholar2025/Aniso", subdir = "package")
+# Step B: Install the INLA package
+# INLA is not on CRAN and must be installed from its own repository.
+install.packages("INLA", repos = c(getOption("repos"), INLA = "[https://inla.r-inla-download.org/R/stable](https://inla.r-inla-download.org/R/stable)"), dep = TRUE)
+
+# Step C: Install the 'SPDEaniso' package
+# We install from the 'package/' subdirectory in this repository.
+remotes::install_github("AnonymousScholar2025/Aniso", subdir = "package", force = TRUE)
 ```
 
 ### Step 3: Run Analysis Scripts
