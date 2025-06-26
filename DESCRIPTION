@@ -1,0 +1,32 @@
+Package: SPDEaniso
+Type: Package
+Title: Anisotropic SPDE
+Version: 0.0.0.9000
+Description: To fill out.
+Depends:
+    R (>= 3.6),
+    methods,
+    fmesher
+Imports:
+    lifecycle,
+    Matrix,
+    stats
+Suggests:
+    ggplot2,
+    inlabru (>= 2.8.0),
+    knitr,
+    testthat (>= 3.0.0),
+    rmarkdown,
+    splancs,
+    gsl
+Remotes: inlabru-org/fmesher@feature/anisotropy
+License: MPL-2.0
+NeedsCompilation: no
+RoxygenNote: 7.3.1
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+VignetteBuilder: knitr
+BuildVignettes: true
+LazyData: true
