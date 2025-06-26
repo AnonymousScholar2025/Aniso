@@ -20,7 +20,7 @@ Suggests:
     rmarkdown,
     splancs,
     gsl
-Remotes: inlabru-org/fmesher@feature/anisotropy
+Remotes: inlabru-org/fmesher@merge-experiment
 License: MPL-2.0
 NeedsCompilation: no
 RoxygenNote: 7.3.2
