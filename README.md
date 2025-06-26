@@ -11,29 +11,45 @@ where the parameters $\theta:=(\kappa, \mathbf{v}, \sigma)$ control the length s
 ## System Requirements
 
 * **R version:** R `(>= 3.6)` is required. R version `4.2.0` or newer is recommended.
+* **Git:** Required for cloning the repository.
 * **External Dependencies:** Some R packages used in the analysis may require external system libraries.
     * The `gsl` package requires the GNU Scientific Library. On Debian/Ubuntu, this can be installed with `sudo apt-get install libgsl-dev`.
     * Packages in the `INLA`/`fmesher` ecosystem may require a Fortran compiler (`gfortran`).
 
-## Installation
+## Workflow for Reproducibility
 
-The `SPDEaniso` R package and all of its dependencies can be installed from this GitHub repository using the `remotes` package. This command will automatically install all required packages from CRAN and the correct `fmesher` branch from GitHub as specified in the `DESCRIPTION` file.
+Please follow these steps in order. The process involves first downloading all necessary files, then installing the custom R package, and finally running the analysis scripts.
 
-```r
-# If 'remotes' is not installed, run this first:
-# install.packages("remotes")
+### Step 1: Clone the Repository
 
-# Install the package and all dependencies from this repository
-remotes::install_github("AnonymousScholar2025/JASA_Aniso_Submission_2")
+First, clone this repository to your local machine using `git`. This will create a folder named `Aniso` containing all the required R scripts and package source code.
+
+```bash
+git clone [https://github.com/AnonymousScholar2025/Aniso.git](https://github.com/AnonymousScholar2025/Aniso.git)
 ```
 
-## Reproducing Manuscript Results
+### Step 2: Install the R Package and Dependencies
 
-All scripts to reproduce the figures and tables in the manuscript are located in the `Manuscript/` directory. Please run scripts from the project's root directory.
+All subsequent commands should be run within an R session started from the root of the cloned `Aniso` directory.
 
+The full installation may take 5-15 minutes, as `devtools` has many of its own dependencies.
 
-### To Reproduce All Results
-After successfully installing the package and its dependencies, you can reproduce the results from the manuscript by running the scripts located in the `Manuscript/` directory.
+```r
+# The installation process requires 'devtools', and 'remotes' is used to install from GitHub.
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+
+# Install the 'SPDEaniso' package from the 'package/' subdirectory in this repository.
+remotes::install_github("AnonymousScholar2025/Aniso", subdir = "package")
+```
+
+### Step 3: Run Analysis Scripts
+
+After the package is successfully installed, you can reproduce the results from the manuscript by running the scripts located in the `Manuscript/` directory.
 
 **Note:** Some analysis scripts, like those for the precipitation data, may automatically download required datasets if they are not found locally.
 
