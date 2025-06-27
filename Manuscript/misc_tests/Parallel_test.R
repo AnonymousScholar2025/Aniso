@@ -1,4 +1,5 @@
 # Load the necessary packages
+library(SPDEaniso)
 library(foreach)
 library(doParallel)
 library(microbenchmark)

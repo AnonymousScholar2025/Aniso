@@ -1,5 +1,6 @@
 library(devtools)
 library(ggplot2)
+library(SPDEaniso)
 #devtools::document(pkg = "package")
 # PARAMETER VALUES NONSTATIONARY
 kp <- 1

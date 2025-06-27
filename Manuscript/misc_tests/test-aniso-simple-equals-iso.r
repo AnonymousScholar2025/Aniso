@@ -1,5 +1,6 @@
 # Tests that isotropic and both anisotropic versions give equal FEM matrices
 # when anisotropy parameters are constant with (kappa=1, v=0)
+library(SPDEaniso)
 loc <- matrix(rnorm(20), 10, 2)
 loc_sf <- sf::st_geometry(sf::st_as_sf(as.data.frame(loc), coords = 1:2))
 loc_sp <- sf::as_Spatial(loc_sf)

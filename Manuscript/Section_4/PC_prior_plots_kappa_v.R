@@ -1,5 +1,6 @@
 # In this file we plot the prior on kappa and v for given values
 # of the flexibility parameters lambda, lambda1
+library(SPDEaniso)
 library(ggplot2)
 library(tidyr)
 library(dplyr)

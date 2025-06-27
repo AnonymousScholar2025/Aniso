@@ -1,5 +1,6 @@
 # In this file we plot the covariance function for a stationary field under different values of v
 # Using a transformation of the Matern covariance function
+library(SPDEaniso)
 library(pracma)
 library(gridExtra)
 library(cowplot)

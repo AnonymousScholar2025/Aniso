@@ -1,4 +1,5 @@
 # Tets that the anisotropic matrices are equal to the isotropic matrices
+library(SPDEaniso)
 mesh <- fm_rcdt_2d_inla(globe = 1)
 plot(mesh)
 

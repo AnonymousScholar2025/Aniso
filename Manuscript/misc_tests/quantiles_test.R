@@ -1,4 +1,5 @@
 ## Tests that functions that calculate the hyper-parameters and prior densities given quantiles work
+library(SPDEaniso)
 library(devtools)
 # Defines the upper bounds for the quantiles
 a0 <- 10

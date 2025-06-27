@@ -18,7 +18,7 @@ where the parameters $\theta:=(\kappa, \mathbf{v}, \sigma)$ control the length s
 
 ## Workflow for Reproducibility
 
-Please follow these steps in order. The process involves first downloading all necessary files, then installing the custom R package, and finally running the analysis scripts.
+Please follow these steps in order. The process involves first downloading all necessary files, then installing the required R packages, and finally running the analysis scripts.
 
 ### Step 1: Clone the Repository
 
@@ -28,38 +28,55 @@ First, clone this repository to your local machine using `git`. This will create
 git clone [https://github.com/AnonymousScholar2025/Aniso.git](https://github.com/AnonymousScholar2025/Aniso.git)
 ```
 
-### Step 2: Install the R Package and Dependencies
+### Step 2: Install R Packages
 
-All subsequent commands should be run within an R session started from the root of the cloned `Aniso` directory.
+#### Prerequisite: Set the Working Directory
 
-Once your R session is running in the correct directory, run the following commands in order. The full installation may take 5-20 minutes, as `devtools` and `INLA` are large packages.
+All subsequent commands must be run within an R session that has the root of the cloned `Aniso` directory as its working directory.
+
+* **Recommended Method:** This repository should contain an RStudio Project file (`Aniso.Rproj`). Simply open this file in RStudio, which will automatically start an R session in the correct directory.
+* **Alternative Method:** If not using RStudio, start an R session and manually set the working directory. For example:
+    ```r
+    # The path will depend on where you cloned the repository
+    setwd("path/to/your/Aniso")
+    ```
+
+#### Installation Commands
+
+Once your R session is running in the correct directory, run the following commands to install all necessary packages. The full installation may take 5-20 minutes.
 
 ```r
-# Step A: Install prerequisite packages
-# The installation process requires 'devtools', and 'remotes' is used to install from GitHub.
-if (!requireNamespace("remotes", quietly = TRUE)) {
-  install.packages("remotes")
-}
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  install.packages("devtools")
+# Step A: Install prerequisite and analysis packages from CRAN
+# These packages are required to install the main package or to run the analysis scripts.
+install.packages(c(
+  "remotes", 
+  "devtools", 
+  "latex2exp",
+  "lamW",
+  "patchwork",
+  "reshape2"
+  # Add any other CRAN packages your analysis scripts require here
+))
+
+# Step B: Install the INLA ecosystem packages if they are missing
+if (!requireNamespace("INLA", quietly = TRUE)) {
+  install.packages(c("INLA", "inlabru", "fmesher"), 
+                   repos = c(getOption("repos"), INLA = "[https://inla.r-inla-download.org/R/stable](https://inla.r-inla-download.org/R/stable)"), 
+                   dep = TRUE)
 }
 
-# Step B: Install the INLA package
-# INLA is not on CRAN and must be installed from its own repository.
-install.packages("INLA", repos = c(getOption("repos"), INLA = "[https://inla.r-inla-download.org/R/stable](https://inla.r-inla-download.org/R/stable)"), dep = TRUE)
-
-# Step C: Install the 'SPDEaniso' package
-# We install from the 'package/' subdirectory in this repository.
-remotes::install_github("AnonymousScholar2025/Aniso", subdir = "package", force = TRUE)
+# Step C: Install the 'SPDEaniso' package from this repository
+# This will automatically find and install your custom fmesher from the Remotes field
+# in the DESCRIPTION file.
+remotes::install_github("AnonymousScholar2025/Aniso", subdir = "package")
 ```
 
 ### Step 3: Run Analysis Scripts
 
-After the package is successfully installed, you can reproduce the results from the manuscript by running the scripts located in the `Manuscript/` directory.
+After all packages are successfully installed, you can reproduce the results from the manuscript by running the scripts located in the `Manuscript/` directory.
 
-**Note:** Some analysis scripts, like those for the precipitation data, may automatically download required datasets if they are not found locally.
+For example, this script generates the main simulation maps for Section 3 of the manuscript.
 
-For example, to run the main simulation loop from Section 3, execute the following command in your R console:
-
-````r
+```r
 source("Manuscript/Section_3/map_loop.R")
+```
