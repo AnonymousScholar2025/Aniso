@@ -11,6 +11,7 @@ library(dplyr)
 library(tidyr)
 library(loo)
 library(progress)
+library(lamW)
 #devtools::document(pkg = "package")
 
 # Defining the random seed

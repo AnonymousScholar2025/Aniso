@@ -11,7 +11,8 @@ Imports:
     lifecycle,
     Matrix,
     stats,
-    INLA
+    INLA,
+    lamW
 Suggests:
     ggplot2,
     inlabru (>= 2.8.0),
