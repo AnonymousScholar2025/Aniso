@@ -40,7 +40,7 @@ log_prior_theta_iso <- log_pc_prior_iso(
 
 # Load and extract data
 load("Manuscript/Section_6/Precip/data/data.RData")
-mesh <- mesh
+mesh <- fm_as_mesh_2d(mesh)
 h_mesh <- scan("Manuscript/Section_6/Precip/data/mesh_elevation.txt")
 
 # Parameters of loop

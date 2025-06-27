@@ -57,7 +57,7 @@ log_prior_theta_iso <- log_pc_prior_iso(
 
 # Get locations and height of locations ---------------------------------------------------------------
 load("Manuscript/Section_6/Precip/data/data.RData")
-mesh <- mesh
+mesh <- fm_as_mesh_2d(mesh)
 h_mesh <- scan("Manuscript/Section_6/Precip/data/mesh_elevation.txt")
 border <- read.table("Manuscript/Section_6/Precip/Matlab/delBorder.txt")
 observation_locations <- as.matrix(read.csv("Manuscript/Section_6/Precip/Matlab/sim_data/observation_locations_sim.txt"))
