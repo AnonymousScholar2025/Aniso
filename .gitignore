@@ -2,3 +2,7 @@ Package/.gitignore
 .Rproj.user
 Package/man/fm_aniso.Rd
 Package/man/fm_aniso.Rd
+Manuscript/Simulation_images/Field_plots/covariance_v_non_stationary.pdf
+.Rproj
+.pdf
+Manuscript/Simulation_images/Field_plots/u_sample_v_non_stationary.pdf
