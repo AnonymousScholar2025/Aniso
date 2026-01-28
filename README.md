@@ -52,7 +52,11 @@ install.packages(c(
   "latex2exp",
   "lamW",
   "patchwork",
-  "reshape2"
+  "patchwork",
+  "reshape2",
+  "pracma",
+  "gridExtra",
+  "cowplot"
   # Add any other CRAN packages your analysis scripts require here
 ))
 
@@ -75,10 +79,35 @@ remotes::install_github("AnonymousScholar2025/Aniso", subdir = "Package")
 
 After all packages are successfully installed, you can reproduce the results from the manuscript by running the scripts located in the `Manuscript/` directory.
 
-For example, this script generates the main simulations for Section 5 of the manuscript.
+**Quick Examples (run in seconds):**
 
 ```r
+# Section 3: Theoretical covariance plots
+source("Manuscript/Section_3/Stationary_u_covariance_plot.R")
+source("Manuscript/Section_3/Nonstationary_u_samples_and_covariance.R")
+
+# Section 4: PC prior visualization
+source("Manuscript/Section_4/PC_prior_plots_kappa_v.R")
+
+# Section 5: Prior/posterior comparison plots (uses pre-computed data)
+source("Manuscript/Section_5/Simulation_plots/Prior_Posterior_plots.R")
+source("Manuscript/Section_5/Simulation_plots/Plot_map_loop_results.R")
+
+# Section 6: Scores and prior comparison plots (uses pre-computed data)
+source("Manuscript/Section_6/Plotting/Scores_sim_plot.R")
+source("Manuscript/Section_6/Plotting/Prior_comparison_precip_rho_r.R")
+source("Manuscript/Section_6/Plotting/Scores_Plots.R")  # Score comparison across observation counts
+```
+
+**Long-Running Simulations (hours):**
+
+```r
+# Section 5: Main simulation loop (600 iterations by default, takes hours)
 source("Manuscript/Section_5/map_loop.R")
+
+# Section 6: Precipitation simulations (100 loops by default, takes hours)
+source("Manuscript/Section_6/Simulation_precip.R")
+source("Manuscript/Section_6/Precipitation_loop.R")
 ```
 
 ### Directory Structure

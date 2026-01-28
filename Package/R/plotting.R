@@ -285,6 +285,7 @@ plt_covariance_of_u_stationary <- function(log_kappa_list,
 #' @param sigma_u_list A list of values for the standard deviation sigma_u
 #' @param path A character string of the path to save the plot
 #' @param titles A character vector of titles for each plot
+#' @export
 
 plt_u_sample <- function(mesh,
                          boundary,

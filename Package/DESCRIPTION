@@ -24,7 +24,7 @@ Suggests:
 Remotes: inlabru-org/fmesher@feature/anisotropy
 License: MPL-2.0
 NeedsCompilation: no
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
