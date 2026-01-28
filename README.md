@@ -67,6 +67,8 @@ if (!requireNamespace("INLA", quietly = TRUE)) {
 # This will automatically find and install your custom fmesher from the Remotes field
 # in the DESCRIPTION file.
 remotes::install_github("AnonymousScholar2025/Aniso", subdir = "Package")
+# OR, if running locally:
+# devtools::install("Package") # Must be run from the root directory of the repo
 ```
 
 ### Step 4: Run Analysis Scripts
@@ -82,7 +84,19 @@ source("Manuscript/Section_5/map_loop.R")
 ### Directory Structure
 
 - `Manuscript/Section_5/`: Contains code for defining and testing the PC priors.
+  - `Prior_Posterior_Data/`: Contains calculated data for comparing the various priors and posteriors.
+    > **Note:** The data in this folder is loaded by default in `Simulation_plots/Prior_Posterior_plots.R` to save time. You can regenerate it by running the `prior_posterior_plotter` functions within that script (warning: this may take time).
+  - `map_loop.R`: The main simulation script for Section 5 results.
+    > **Warning:** This script runs 600 iterations by default and is computationally intensive (hours). To test it quickly, we recommend reducing `number_of_loops` (line 116) to a small number (e.g., 2).
+  - `Simulation_Results/`: Where the output of `map_loop.R` is saved.
+  - `Simulation_plots/Plot_map_loop_results.R`: Generates the plots seen in the manuscript using the data from `Simulation_Results`.
+
 - `Manuscript/Section_6/`: Contains code for the precipitation application (Section 6).
+  - `Simulation_precip.R`: The main script for generating the simulation data.
+    > **Note:** Data is saved to `Precip/data_sim/` and `Precip/Matlab/sim_data/`.
+  - `Precip/data_sim/`: Stores the simulated precipitation data.
+  - `Plotting/`: Contains scripts for reproducing manuscript plots.
+    - `Scores_sim_plot.R`: Generates score comparison plots using the pre-calculated LOO results in `Precip/Results/`.
 - `Manuscript/Section_3/`: Contains code for the theoretical properties of the field.
 
 ### Viewing .nb Files
