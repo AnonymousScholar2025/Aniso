@@ -82,7 +82,7 @@ After all packages are successfully installed, you can reproduce the results fro
 **Quick Examples (run in seconds):**
 
 ```r
-# Section 3: Theoretical covariance plots
+# Section 3: Covariance plots
 source("Manuscript/Section_3/Stationary_u_covariance_plot.R")
 source("Manuscript/Section_3/Nonstationary_u_samples_and_covariance.R")
 

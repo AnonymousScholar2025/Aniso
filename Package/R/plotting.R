@@ -158,7 +158,7 @@ plt_pc_prior_kappa_v <- function(lambda,
     )
   p_v <- ggplot(df_v_long, aes(x = partition_v1, y = partition_v2, group = interaction(partition_v1, partition_v2))) +
     geom_tile(aes(fill = value)) +
-    geom_contour(aes(z = value), color = "black") +
+    geom_contour(aes(z = value), color = "black", na.rm = TRUE) +
     scale_fill_gradientn(colors = c("white", "red")) +
     labs(
       x = TeX("$v_1$"),
