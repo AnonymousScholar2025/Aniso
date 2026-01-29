@@ -1,7 +1,7 @@
 library(ggplot2)
 library(patchwork)
 library(devtools)
-#devtools::document(pkg = "package")
+# devtools::document(pkg = "package")
 
 # Inspect parameters used for data generation ---------------
 LOO_pc <- readRDS("Manuscript/Section_6/Precip/Results/LOO_pc_20000.RData")
@@ -137,11 +137,12 @@ latex_labels <- c(
 )
 txt_size <- 12
 p_CI <- ggplot(df_CI, aes(x = n_loc, y = value, color = Model, group = Model)) +
-  geom_line() +
-  geom_point() +
-  facet_grid(sim_type ~ parameter, scales = "free_y",
-            #labeller = labeller(parameter = as_labeller(latex_labels, label_parsed))
-            ) +
+  geom_line(na.rm = TRUE) +
+  geom_point(na.rm = TRUE) +
+  facet_grid(sim_type ~ parameter,
+    scales = "free_y",
+    # labeller = labeller(parameter = as_labeller(latex_labels, label_parsed))
+  ) +
   labs(
     x = "Number of Locations",
     y = "CI score",
@@ -170,8 +171,8 @@ p <- ggplot(df, aes(
   color = Model,
   group = Model
 )) +
-  geom_line() +
-  geom_point() +
+  geom_line(na.rm = TRUE) +
+  geom_point(na.rm = TRUE) +
   labs(x = "Number of Observations", y = "Score") +
   facet_grid(sim_type ~ score_type, scales = "free_y") +
   theme_minimal() +
@@ -198,8 +199,8 @@ for (name in names(df_split)) {
     color = Model,
     group = Model
   )) +
-    geom_line() +
-    geom_point() +
+    geom_line(na.rm = TRUE) +
+    geom_point(na.rm = TRUE) +
     labs(x = "Number of Observations", y = "Score", title = full_title) +
     theme_minimal() +
     theme(
@@ -278,8 +279,8 @@ for (name in names(df_diff_split)) {
       group = Model
     )
   ) +
-    geom_line() +
-    geom_point() +
+    geom_line(na.rm = TRUE) +
+    geom_point(na.rm = TRUE) +
     labs(
       x = "Number of Observations",
       y = "Score Difference",
@@ -298,24 +299,18 @@ for (name in names(df_diff_split)) {
 
 d_combined <- d1 + d3 + d5 + d2 + d4 + d6 + plot_layout(guides = "collect")
 print(d_combined)
-custom_labeller <- function(variable, value) {
-  if (variable == "sim_type") {
-    ifelse(as.character(value) == "ANISO",
-      "Anisotropic Data",
-      "Isotropic Data"
-    )
-  } else {
-    return(as.character(value))
-  }
-}
+custom_labeller <- ggplot2::labeller(
+  sim_type = c(ANISO = "Anisotropic Data", ISO = "Isotropic Data"),
+  score_type = ggplot2::label_value
+)
 d <- ggplot(df_diff, aes(
   x = factor(n_loc),
   y = score,
   color = Model,
   group = Model
 )) +
-  geom_line() +
-  geom_point() +
+  geom_line(na.rm = TRUE) +
+  geom_point(na.rm = TRUE) +
   labs(x = "Number of Observations", y = "Score Difference") +
   facet_grid(sim_type ~ score_type, scales = "free", labeller = custom_labeller) +
   theme_minimal() +

@@ -46,11 +46,12 @@ df <- rbind(df_loo_error, df_CRPS, df_DSS)
 
 
 # Plot the scores
-ggplot(df, aes(x = factor(n_locations), y = score, color = model, group = model)) +
-  geom_line() +
-  geom_point() +
+p <- ggplot(df, aes(x = factor(n_locations), y = score, color = model, group = model)) +
+  geom_line(na.rm = TRUE) +
+  geom_point(na.rm = TRUE) +
   labs(x = "Number of Observations", y = "Score") +
   facet_wrap(~score_type, scales = "free_y") +
   theme_minimal() +
   theme(text = element_text(size = 20))
-ggsave("Manuscript/Simulation_images/Precipitation/LO_scores.pdf", width = 15, height = 5, dpi = 300)
+print(p)
+ggsave("Manuscript/Simulation_images/Precipitation/LO_scores.pdf", plot = p, width = 15, height = 5, dpi = 300)

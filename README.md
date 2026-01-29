@@ -79,6 +79,8 @@ remotes::install_github("AnonymousScholar2025/Aniso", subdir = "Package")
 
 After all packages are successfully installed, you can reproduce the results from the manuscript by running the scripts located in the `Manuscript/` directory.
 
+> **Note:** If you want to use `SPDEaniso` functions interactively (outside of the provided scripts), you must first load the package with `library(SPDEaniso)`.
+
 **Quick Examples (run in seconds):**
 
 ```r

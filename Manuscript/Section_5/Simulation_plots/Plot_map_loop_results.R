@@ -1,6 +1,7 @@
 # In this file we plot the results from the simulation study of different priors for the parameters
 # (log(kappa),v,log(sigma_u),log(sigma_epsilon)) of the anisotropic SPDE
 # That is we plot the distances to the MAP estimate, the lengths of the credible intervals, the probabilities of the true parameter being in the credible interval, the KL divergence, the complexity of the approximation, the K-S test and the k diagnostics.
+library(SPDEaniso)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -91,31 +92,19 @@ path_suffix <- paste0(
 variable_indexes <- c(1, 2, 3) # log(kappa), v1,v2 are plotted
 # variable_indexes <- c(4, 5) # log_sigma_u, log_sigma_epsilon are plotted
 # variable_indexes <- c(1, 2, 3, 4, 5) # all parameters are plotted
-labeller <- function(variable, value) {
-  latex_labels <- list(
-    log_kappa = TeX("$\\log(\\kappa)$"),
-    v1 = TeX("$v_1$"),
-    v2 = TeX("$v_2$"),
-    log_sigma_u = TeX("$\\log(\\sigma_u)$"),
-    log_sigma_epsilon = TeX("$\\log(\\sigma_\\epsilon)$")
-  )
-  value <- lapply(value, function(v) {
-    latex_labels[[v]]
-  })
-  return(value)
-}
+labeller <- as_labeller(c(
+  log_kappa = "log(kappa)",
+  v1 = "v[1]",
+  v2 = "v[2]",
+  log_sigma_u = "log(sigma[u])",
+  log_sigma_epsilon = "log(sigma[epsilon])"
+), default = label_parsed)
 if (length(variable_indexes) == 2) {
   path_suffix <- paste0("only_sigma", path_suffix)
-  labeller <- function(variable, value) {
-    latex_labels <- list(
-      log_sigma_u = TeX("$\\log(\\sigma_u)$"),
-      log_sigma_epsilon = TeX("$\\log(\\sigma_\\epsilon)$")
-    )
-    value <- lapply(value, function(v) {
-      latex_labels[[v]]
-    })
-    return(value)
-  }
+  labeller <- as_labeller(c(
+    log_sigma_u = "log(sigma[u])",
+    log_sigma_epsilon = "log(sigma[epsilon])"
+  ), default = label_parsed)
 }
 if (length(variable_indexes) == 5) {
   path_suffix <- paste0("all_par", path_suffix)

@@ -10,6 +10,7 @@
 #' @param n_points The number of points in the partition
 #' @param path A character string of the path to save the plot
 #' @param txtsize An integer of the text size by default 20
+#' @export
 plt_pc_priors_kappa_rho_aniso_iso <- function(rho0,
                                               a0,
                                               alpha = 0.01,
@@ -498,20 +499,14 @@ plt_marginal_variance_of_u <- function(mesh,
 
 
 
-# Define a labelling function
-latex_labeller <- function(variable, value) {
-  latex_labels <- list(
-    log_kappa = TeX("$\\log(\\kappa)$"),
-    v1 = TeX("$v_1$"),
-    v2 = TeX("$v_2$"),
-    log_sigma_u = TeX("$\\log(\\sigma_u)$"),
-    log_sigma_epsilon = TeX("$\\log(\\sigma_\\epsilon)$")
-  )
-  value <- lapply(value, function(v) {
-    latex_labels[[v]]
-  })
-  return(value)
-}
+# Define a labelling function using modern ggplot2 API
+latex_labeller <- ggplot2::as_labeller(c(
+  log_kappa = "log(kappa)",
+  v1 = "v[1]",
+  v2 = "v[2]",
+  log_sigma_u = "log(sigma[u])",
+  log_sigma_epsilon = "log(sigma[epsilon])"
+), default = ggplot2::label_parsed)
 
 #' @title Plot distances to MAP
 #' @description Plot distances to MAP for each prior type
@@ -568,7 +563,7 @@ plt_distances_to_MAP <- function(results_list,
     all_distances$variable <- factor(all_distances$variable, labels = selected_variables)
 
     p <- ggplot(all_distances) +
-      stat_ecdf(aes(value, color = prior_type, linetype = prior_type)) +
+      stat_ecdf(aes(value, color = prior_type, linetype = prior_type), na.rm = TRUE) +
       labs(color = "Prior", linetype = "Prior") +
       scale_x_continuous(trans = "log10") +
       coord_cartesian(xlim = c(lower_bound, NA)) +
@@ -717,7 +712,7 @@ plt_CI_lengths_and_get_mean_lengths <- function(results_list,
     }
 
     p <- ggplot(all_lengths) +
-      stat_ecdf(aes(value, color = prior_type, linetype = prior_type)) +
+      stat_ecdf(aes(value, color = prior_type, linetype = prior_type), na.rm = TRUE) +
       labs(color = "Prior", linetype = "Prior") +
       facet_wrap(~variable, labeller = labeller) +
       scale_x_continuous(trans = "log10", limits = c(0.5, NA)) +
@@ -794,6 +789,7 @@ approximation_type_mapper <- function(approximation_type) {
   return(approximation_type_abbreviations[[approximation_type]])
 }
 
+#' @export
 plt_frequency_true_parameter_in_CI <- function(results_list,
                                                prior_types = prior_types,
                                                approximation_types = approximation_types,
@@ -982,7 +978,7 @@ plt_KL_and_get_mean_KL <- function(results_list,
     }
 
     p <- ggplot(all_KL) +
-      stat_ecdf(aes(value, color = prior_type, linetype = prior_type)) +
+      stat_ecdf(aes(value, color = prior_type, linetype = prior_type), na.rm = TRUE) +
       labs(color = "Prior", linetype = "Prior") +
       scale_x_continuous(trans = "log10") +
       labs(title = titles[[i]]) +
@@ -1082,7 +1078,7 @@ plt_probabilities <- function(results_list,
 
     all_probabilities$parameter <- factor(all_probabilities$parameter, levels = parameter_names)
     p <- ggplot(all_probabilities) +
-      stat_ecdf(aes(prob, color = prior, linetype = prior)) +
+      stat_ecdf(aes(prob, color = prior, linetype = prior), na.rm = TRUE) +
       labs(color = "Prior", linetype = "Prior") +
       geom_abline(
         slope = 1,
@@ -1140,7 +1136,7 @@ inla_KS_copy <- function(x, y, ...) {
   if (any(is.na(x))) {
     x <- x[!is.na(x)]
   }
-  test <- ks.test(x, y, ...)
+  test <- suppressWarnings(ks.test(x, y, ...))
   n <- length(x)
   Fn <- ((1:n) - 0.5) / n
   CDF_true <- y(sort(x))
@@ -1166,16 +1162,13 @@ inla_KS_copy <- function(x, y, ...) {
   invisible(test)
 }
 
-latex_labeller2 <- function(variable, value) {
-  latex_labels <- c(
-    log_kappa = expression(paste(log(kappa))),
-    v1 = expression(paste(v[1])),
-    v2 = expression(paste(v[2])),
-    log_sigma_u = expression(paste(log(sigma[u]))),
-    log_sigma_epsilon = expression(paste(log(sigma[epsilon])))
-  )
-  return(latex_labels)
-}
+latex_labeller2 <- ggplot2::as_labeller(c(
+  log_kappa = "log(kappa)",
+  v1 = "v[1]",
+  v2 = "v[2]",
+  log_sigma_u = "log(sigma[u])",
+  log_sigma_epsilon = "log(sigma[epsilon])"
+), default = ggplot2::label_parsed)
 #' @export
 plt_KS <- function(results_list,
                    prior_types,
@@ -1231,7 +1224,7 @@ plt_KS <- function(results_list,
           y <- punif
           CDF_true <- y(sort(x))
           empirical_diff <- (Fn - CDF_true) * sqrt(n)
-          KS_result <- ks.test(x, y)
+          KS_result <- suppressWarnings(ks.test(x, y))
           # Add the KS statistic and p-value for the current parameter to the data frame
           KS_results <- rbind(KS_results, suppressWarnings(
             data.frame(
@@ -1449,7 +1442,7 @@ plt_complexity_and_get_mean_complexity <- function(results_list,
     }
 
     p <- ggplot(all_complexity) +
-      stat_ecdf(aes(value, color = prior_type, linetype = prior_type)) +
+      stat_ecdf(aes(value, color = prior_type, linetype = prior_type), na.rm = TRUE) +
       labs(color = "Prior", linetype = "Prior") +
       scale_x_continuous(trans = "log10") +
       labs(title = titles[[i]]) +
@@ -1473,7 +1466,7 @@ plt_complexity_and_get_mean_complexity <- function(results_list,
 
     complexity_mean <- lapply(prior_types, function(prior_type) {
       lapply(names(approximation_types[2:3]), function(approximation_type) {
-        mean(complexity[[prior_type]][[approximation_type]])
+        suppressWarnings(mean(complexity[[prior_type]][[approximation_type]], na.rm = TRUE))
       })
     })
   }
@@ -1531,7 +1524,7 @@ plt_k_diagnostics <- function(results_list,
     all_k_diagnostics <- reshape2::melt(all_k_diagnostics, id.vars = "iteration")
 
     p <- ggplot(all_k_diagnostics) +
-      stat_ecdf(aes(value, color = variable)) +
+      stat_ecdf(aes(value, color = variable), na.rm = TRUE) +
       labs(color = "Prior", color = "Variable") +
       labs(title = titles[[i]]) +
       labs(x = "k diagnostic", y = "CDF") +
@@ -1602,7 +1595,7 @@ plt_weights_cdf <- function(results,
   )
 
   p <- ggplot(all_weights_long) +
-    stat_ecdf(aes(weight, color = prior_type, linetype = weight_type)) +
+    stat_ecdf(aes(weight, color = prior_type, linetype = weight_type), na.rm = TRUE) +
     labs(x = "Log weight", y = "Cumulative density") +
     theme(legend.position = "bottom") +
     xlim(c(-5, 0))
@@ -2229,7 +2222,7 @@ prior_posterior_plotter_old <- function(theta_fixed = map_pc$par,
 #' @title Tables for KS test
 #' @description Create tables for KS test
 #' @param ks_results A data frame containing the results of the KS test when simulated from a single prior
-
+#' @export
 KS_table <- function(ks_results) {
   # Remove duplicate rows based on the columns we want to keep
   ks_results_cleaned <- ks_results %>%
@@ -2253,11 +2246,15 @@ KS_table <- function(ks_results) {
   pvals_table <- ks_results_cleaned[, c("prior", "parameter", "p_value")] %>%
     pivot_wider(names_from = parameter, values_from = p_value)
 
-  # Convert column names to LaTeX-friendly format
-  colnames(pvals_table) <- c("Prior", "$\\log(\\kappa)$", "$v_1$", "$v_2$", "$\\log(\\sigma_u)$", "$\\log(\\sigma_{\\epsilon})$")
+  # Convert column names to LaTeX-friendly format if all expected columns exist
+  expected_cols <- c("Prior", "$\\log(\\kappa)$", "$v_1$", "$v_2$", "$\\log(\\sigma_u)$", "$\\log(\\sigma_{\\epsilon})$")
+  if (ncol(pvals_table) == length(expected_cols)) {
+    colnames(pvals_table) <- expected_cols
+  }
 
-  # Generate LaTeX code for the table
-  print(xtable(pvals_table, align = "lrrrrrr", digits = 3),
+  # Generate LaTeX code for the table with dynamic alignment
+  align_str <- paste0("l", paste(rep("r", ncol(pvals_table)), collapse = ""))
+  print(xtable(pvals_table, align = align_str, digits = 3),
     sanitize.text.function = function(x) x,
     include.colnames = TRUE,
     include.rownames = FALSE

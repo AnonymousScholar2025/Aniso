@@ -1,4 +1,4 @@
-# library(SPDEaniso)
+library(SPDEaniso)
 library(devtools)
 library(ggplot2)
 library(Matrix)
@@ -10,7 +10,7 @@ library(purrr)
 library(sf)
 library(patchwork)
 library(latex2exp)
-#devtools::document(pkg = "package")
+# devtools::document(pkg = "package")
 
 
 # Hyperparameters on priors -----------------------------------------------
@@ -165,7 +165,7 @@ l_v_pc <- 1
 l_log_kappa_uniform <- 5
 l_v_uniform <- 5
 
-#Generating data
+# Generating data
 
 # df_pc <- prior_posterior_plotter(
 #   theta_fixed = true_par,
@@ -241,7 +241,7 @@ l_v_uniform <- 5
 # )
 
 
-#Reading data
+# Reading data
 
 df_pc <- readRDS(path(
   1,
