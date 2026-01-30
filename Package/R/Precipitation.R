@@ -197,7 +197,7 @@ MAP_spatial_effect <- function(
 #' @param sigma_epsilon0 Quantile for standard deviation of the noise
 #' @param rho0 Quantile for the correlation range
 #' @param alpha Quantile by default 0.01
-
+#' @export
 log_pc_prior_iso <- function(
     sigma_u0, sigma_epsilon0, rho0, alpha = 0.01) {
     kappa0 <- sqrt(8) / rho0

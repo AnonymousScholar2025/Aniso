@@ -57,7 +57,6 @@ install.packages(c(
   "pracma",
   "gridExtra",
   "cowplot"
-  # Add any other CRAN packages your analysis scripts require here
 ))
 
 # Step B: Install the INLA ecosystem packages if they are missing

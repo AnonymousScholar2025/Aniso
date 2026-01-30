@@ -1117,6 +1117,7 @@ correlation_range <- function(log_kappa) {
   sqrt(8) / exp(log_kappa)
 }
 
+#' @export
 convert_to_range_and_non_log <- function(theta) {
   # Apply the transformations to each row of theta
   if (dim(theta)[2] == 5) {
