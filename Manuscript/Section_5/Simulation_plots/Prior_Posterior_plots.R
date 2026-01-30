@@ -4,12 +4,12 @@
 # DESCRIPTION: Generates prior and posterior comparison plots.
 #
 # DATA REQUIREMENTS:
-# This script can either:
-#   1. Load pre-computed data from Manuscript/Section_5/Prior_Posterior_Data/
-#   2. Regenerate data by calling the prior_posterior_plotter functions
-#      (computationally intensive, may take minutes to hours)
+# This script automatically checks if data files exist in Prior_Posterior_Data/.
+# - If data exists: loads the pre-computed data (fast)
+# - If data is missing: generates the data (may take minutes to hours)
 #
-# If the data files are not present, the script will regenerate them.
+# To force regeneration of data even when files exist, set:
+#   regenerate_data <- TRUE  (around line 182)
 # =============================================================================
 library(SPDEaniso)
 library(devtools)
@@ -179,111 +179,82 @@ l_log_kappa_uniform <- 5
 l_v_uniform <- 5
 
 # Generating data
+# Set regenerate_data = TRUE to force regeneration even if data files exist
+regenerate_data <- FALSE
 
-# df_pc <- prior_posterior_plotter(
-#   theta_fixed = true_par,
-#   log_priors = log_priors[1],
-#   log_posteriors = log_posteriors[1],
-#   l_log_kappa = l_log_kappa_pc,
-#   l_v = l_v_pc,
-#   n_points_log_kappa = n_points_log_kappa_pc,
-#   n_points_v = n_points_v_pc,
-#   path_data = path(
-#     1,
-#     n_points_log_kappa_pc,
-#     n_points_v_pc,
-#     l_log_kappa_pc,
-#     l_v_pc
-#   ),
-#   # path1 = "Manuscript/Simulation_images/prior_posterior_plots_log_kappa.pdf",
-#   # path2 = "Manuscript/Simulation_images/prior_posterior_plots_v.pdf"
-# )
+# Check if data files exist
+pc_data_exists <- file.exists(path(1, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_pc, l_v_pc))
+eg_data_exists <- file.exists(path(2, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_pc, l_v_pc))
+uniform_data_exists <- file.exists(path(3, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_uniform, l_v_uniform))
+beta_data_exists <- file.exists(path(4, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_uniform, l_v_uniform))
 
+# Generate or load PC prior data
+if (!pc_data_exists || regenerate_data) {
+  message("Generating PC prior data (this may take a while)...")
+  df_pc <- prior_posterior_plotter(
+    theta_fixed = true_par,
+    log_priors = log_priors[1],
+    log_posteriors = log_posteriors[1],
+    l_log_kappa = l_log_kappa_pc,
+    l_v = l_v_pc,
+    n_points_log_kappa = n_points_log_kappa_pc,
+    n_points_v = n_points_v_pc,
+    path_data = path(1, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_pc, l_v_pc)
+  )
+} else {
+  df_pc <- readRDS(path(1, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_pc, l_v_pc))
+}
 
+# Generate or load EG prior data
+if (!eg_data_exists || regenerate_data) {
+  message("Generating EG prior data (this may take a while)...")
+  df_eg <- prior_posterior_plotter(
+    theta_fixed = true_par,
+    log_priors = log_priors[2],
+    log_posteriors = log_posteriors[2],
+    l_log_kappa = l_log_kappa_pc,
+    l_v = l_v_pc,
+    n_points_log_kappa = n_points_log_kappa_pc,
+    n_points_v = n_points_v_pc,
+    path_data = path(2, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_pc, l_v_pc)
+  )
+} else {
+  df_eg <- readRDS(path(2, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_pc, l_v_pc))
+}
 
-# df_eg <- prior_posterior_plotter(
-#   theta_fixed = true_par,
-#   log_priors = log_priors[2],
-#   log_posteriors = log_posteriors[2],
-#   l_log_kappa = l_log_kappa_pc,
-#   l_v = l_v_pc,
-#   n_points_log_kappa = n_points_log_kappa_pc,
-#   n_points_v = n_points_v_pc,
-#   path_data = path(
-#     2,
-#     n_points_log_kappa_pc,
-#     n_points_v_pc,
-#     l_log_kappa_pc,
-#     l_v_pc
-#   )
-# )
+# Generate or load Uniform prior data
+if (!uniform_data_exists || regenerate_data) {
+  message("Generating Uniform prior data (this may take a while)...")
+  df_uniform <- prior_posterior_plotter(
+    theta_fixed = true_par,
+    log_priors = log_priors[3],
+    log_posteriors = log_posteriors[3],
+    l_log_kappa = l_log_kappa_uniform,
+    l_v = l_v_uniform,
+    n_points_log_kappa = n_points_log_kappa_pc,
+    n_points_v = n_points_v_pc,
+    path_data = path(3, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_uniform, l_v_uniform)
+  )
+} else {
+  df_uniform <- readRDS(path(3, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_uniform, l_v_uniform))
+}
 
-# df_uniform <- prior_posterior_plotter(
-#   theta_fixed = true_par,
-#   log_priors = log_priors[3],
-#   log_posteriors = log_posteriors[3],
-#   l_log_kappa = l_log_kappa_uniform,
-#   l_v = l_v_uniform,
-#   n_points_log_kappa = n_points_log_kappa_pc,
-#   n_points_v = n_points_v_pc,
-#   path_data = path(
-#     3,
-#     n_points_log_kappa_pc,
-#     n_points_v_pc,
-#     l_log_kappa_uniform,
-#     l_v_uniform
-#   )
-# )
-
-
-# df_beta <- prior_posterior_plotter(
-#   theta_fixed = true_par,
-#   log_priors = log_priors[4],
-#   log_posteriors = log_posteriors[4],
-#   l_log_kappa = l_log_kappa_uniform,
-#   l_v = l_v_uniform,
-#   n_points_log_kappa = n_points_log_kappa_pc,
-#   n_points_v = n_points_v_pc,
-#   path_data = path(
-#     4,
-#     n_points_log_kappa_pc,
-#     n_points_v_pc,
-#     l_log_kappa_uniform,
-#     l_v_uniform
-#   )
-# )
-
-
-# Reading data
-
-df_pc <- readRDS(path(
-  1,
-  n_points_log_kappa_pc,
-  n_points_v_pc,
-  l_log_kappa_pc,
-  l_v_pc
-))
-df_eg <- readRDS(path(
-  2,
-  n_points_log_kappa_pc,
-  n_points_v_pc,
-  l_log_kappa_pc,
-  l_v_pc
-))
-df_uniform <- readRDS(path(
-  3,
-  n_points_log_kappa_pc,
-  n_points_v_pc,
-  l_log_kappa_uniform,
-  l_v_uniform
-))
-df_beta <- readRDS(path(
-  4,
-  n_points_log_kappa_pc,
-  n_points_v_pc,
-  l_log_kappa_uniform,
-  l_v_uniform
-))
+# Generate or load Beta prior data
+if (!beta_data_exists || regenerate_data) {
+  message("Generating Beta prior data (this may take a while)...")
+  df_beta <- prior_posterior_plotter(
+    theta_fixed = true_par,
+    log_priors = log_priors[4],
+    log_posteriors = log_posteriors[4],
+    l_log_kappa = l_log_kappa_uniform,
+    l_v = l_v_uniform,
+    n_points_log_kappa = n_points_log_kappa_pc,
+    n_points_v = n_points_v_pc,
+    path_data = path(4, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_uniform, l_v_uniform)
+  )
+} else {
+  df_beta <- readRDS(path(4, n_points_log_kappa_pc, n_points_v_pc, l_log_kappa_uniform, l_v_uniform))
+}
 theta_fixed <- df_pc$theta_fixed
 df_list <- list(df_pc, df_eg, df_uniform, df_beta)
 
