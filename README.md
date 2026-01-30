@@ -93,7 +93,7 @@ After all packages are successfully installed, you can reproduce the results fro
 > | `Section_6/Plotting/Scores_sim_plot.R`               | `Section_6/Simulation_precip.R` (run 18 times) |
 > | `Section_6/Plotting/Scores_Plots.R`                  | `Section_6/Precipitation_loop.R` (run 6 times) |
 >
-> **To generate the required data:** Run the simulation scripts first (see each script's header for detailed instructions), then run the plotting scripts.
+> **To generate the required data:** Run the simulation scripts first (see each script's header for detailed instructions), then run the plotting scripts. **Note:** Data generation is computationally intensive and may take hours to days depending on the script.
 
 **Quick Examples (run in seconds):**
 
