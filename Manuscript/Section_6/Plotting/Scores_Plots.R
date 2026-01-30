@@ -21,6 +21,32 @@ n_weights <- 1000
 n_loops <- 10
 models <- c("pc", "EG", "iso")
 
+# =============================================================================
+# DATA AVAILABILITY CHECK
+# =============================================================================
+# Check if required data files exist (sample one file)
+sample_data_path <- paste0(
+  "Manuscript/Section_6/Precip/Results/LOO_pc_w=", n_weights,
+  "_loc=", n_locations[1], "_n_loops=", n_loops, ".RData"
+)
+
+if (!file.exists(sample_data_path)) {
+  stop(
+    "Required simulation data not found!\n",
+    "  Missing: ", sample_data_path, "\n\n",
+    "  To generate the data, you must run Precipitation_loop.R MULTIPLE TIMES:\n\n",
+    "  1. Open Manuscript/Section_6/Precipitation_loop.R\n",
+    "  2. For EACH value of n_locations, set the variable (around line 69) and run:\n\n",
+    "     n_locations: ", paste(n_locations, collapse = ", "), "\n\n",
+    "     That is ", length(n_locations), " runs total (each takes several hours).\n\n",
+    "  3. Example for one run:\n",
+    "       n_locations <- ", n_locations[1], "\n",
+    "       source('Manuscript/Section_6/Precipitation_loop.R')\n\n",
+    "  WARNING: Each run is computationally intensive and takes several hours.\n"
+  )
+}
+# =============================================================================
+
 # Initialize lists to store the data
 loo_error <- list()
 CRPS <- list()

@@ -1,5 +1,27 @@
-# This file is used to obtain the results of the simulation
-# comparing the various precipitation models
+# =============================================================================
+# Simulation_precip.R
+# =============================================================================
+# DESCRIPTION: Generates simulation data for precipitation model comparisons.
+#
+# USAGE:
+# This script must be run MULTIPLE TIMES to generate all required data for
+# the Scores_sim_plot.R plotting script.
+#
+# Before each run, set the following variables (around lines 70-75):
+#   sim_type <- "ANISO"  # or "ISO"
+#   n_loc    <- 50       # one of: 2000, 1000, 800, 600, 400, 200, 100, 50, 25
+#
+# Required runs for full data:
+#   sim_types: "ANISO", "ISO"
+#   n_locs:    2000, 1000, 800, 600, 400, 200, 100, 50, 25
+#   Total: 2 x 9 = 18 runs (each takes several hours)
+#
+# For quick testing, run with just n_loc = 50 and 25 for both sim_types.
+#
+# Output is saved to:
+#   - Manuscript/Section_6/Precip/data_sim/
+#   - Manuscript/Section_6/Precip/Results/
+# =============================================================================
 library(devtools)
 library(SPDEaniso)
 library(ggplot2)
@@ -12,7 +34,7 @@ library(foreach)
 library(doParallel)
 library(scoringRules)
 library(progress)
-#devtools::document(pkg = "package")
+# devtools::document(pkg = "package")
 
 # # Get height first time
 # observations_height <- getHeight(observation_locations)$hCov
@@ -104,7 +126,7 @@ data_sim <- data.frame(
   altitude = observations_height
 )
 
-#Save data
+# Save data
 save(data_sim,
   file = paste0(
     "Manuscript/Section_6/Precip/Matlab/sim_data/data_sim_",

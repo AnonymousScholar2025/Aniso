@@ -55,6 +55,28 @@ titles <- list(
     true
   }, " ~ ", pi[beta]))
 )
+
+# =============================================================================
+# DATA AVAILABILITY CHECK
+# =============================================================================
+# Check if any required data files exist
+sample_data_path <- paste0(
+  "Manuscript/Section_5/Simulation_Results/results_pc_n_obs=",
+  n_observations, "_n_loops=", number_of_loops, "_n_weights=", number_of_weights,
+  "_wu=Inf_wb=20.rds"
+)
+
+if (!file.exists(sample_data_path)) {
+  stop(
+    "Required simulation data not found!\n",
+    "  Missing: ", sample_data_path, "\n\n",
+    "  To generate the data, run map_loop.R:\n",
+    "    source('Manuscript/Section_5/map_loop.R')\n\n",
+    "  WARNING: This script runs 600 iterations by default and takes several hours.\n",
+    "  To test quickly, reduce 'number_of_loops' in map_loop.R (line ~116).\n"
+  )
+}
+# =============================================================================
 results_list <- list()
 for (prior_type in prior_types) {
   true_parameter_distribution <- prior_type

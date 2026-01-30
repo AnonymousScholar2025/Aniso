@@ -1,5 +1,28 @@
-#This file is used to compare the various precipitation models under varying
-#ammounts of observed data
+# =============================================================================
+# Precipitation_loop.R
+# =============================================================================
+# DESCRIPTION: Compares various precipitation models under varying amounts
+# of observed data using leave-one-out cross-validation.
+#
+# REQUIRED BASELINE DATA:
+# This script requires the following data files (included in the repository):
+#   - Manuscript/Section_6/Precip/data/data.RData
+#   - Manuscript/Section_6/Precip/data/mesh_elevation.txt
+#
+# USAGE:
+# This script must be run MULTIPLE TIMES to generate all required data for
+# the Scores_Plots.R plotting script.
+#
+# Before each run, set the 'n_locations' variable (around line 47):
+#   n_locations <- 100  # one of: 233, 200, 150, 100, 50, 20
+#
+# Required runs for full data (Scores_Plots.R):
+#   n_locations: 233, 200, 150, 100, 50, 20
+#   Total: 6 runs (each takes several hours)
+#
+# Output is saved to:
+#   - Manuscript/Section_6/Precip/Results/
+# =============================================================================
 library(devtools)
 library(SPDEaniso)
 library(ggplot2)
@@ -13,7 +36,7 @@ library(doParallel)
 install.packages("scoringRules")
 library(scoringRules)
 library(progress)
-#devtools::document(pkg = "package")
+# devtools::document(pkg = "package")
 
 # Defines the upper bounds for the quantiles
 rho0 <- 10 # Controls the size of kappa in PC and non PC priors

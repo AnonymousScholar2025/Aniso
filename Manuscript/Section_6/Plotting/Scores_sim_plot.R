@@ -21,6 +21,33 @@ library(patchwork)
 library(devtools)
 # devtools::document(pkg = "package")
 
+# =============================================================================
+# DATA AVAILABILITY CHECK
+# =============================================================================
+# Check if required data files exist
+sample_data_path <- "Manuscript/Section_6/Precip/Results/LOO_pc_20000.RData"
+sample_sim_data_path <- "Manuscript/Section_6/Precip/data_sim/ANISO_n_loc=50_n_weights=100_n_loops=100pc.rds"
+
+if (!file.exists(sample_data_path) || !file.exists(sample_sim_data_path)) {
+  stop(
+    "Required simulation data not found!\n",
+    "  Missing: ", sample_data_path, " or ", sample_sim_data_path, "\n\n",
+    "  To generate the data, you must run Simulation_precip.R MULTIPLE TIMES:\n\n",
+    "  1. Open Manuscript/Section_6/Simulation_precip.R\n",
+    "  2. For EACH combination of sim_type and n_loc, set the variables and run:\n\n",
+    "     sim_types: 'ANISO', 'ISO'\n",
+    "     n_locs:    2000, 1000, 800, 600, 400, 200, 100, 50, 25\n\n",
+    "     That is 2 x 9 = 18 runs total (each takes several hours).\n\n",
+    "  3. Example for one run:\n",
+    "       sim_type <- 'ANISO'\n",
+    "       n_loc <- 50\n",
+    "       source('Manuscript/Section_6/Simulation_precip.R')\n\n",
+    "  WARNING: Each run takes several hours. Consider running only a subset\n",
+    "           (e.g., n_loc = 50, 25) for testing purposes.\n"
+  )
+}
+# =============================================================================
+
 # Inspect parameters used for data generation ---------------
 LOO_pc <- readRDS("Manuscript/Section_6/Precip/Results/LOO_pc_20000.RData")
 LOO_iso <- readRDS("Manuscript/Section_6/Precip/Results/LOO_iso_20000.RData")
