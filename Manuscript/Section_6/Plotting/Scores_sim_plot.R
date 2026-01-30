@@ -1,3 +1,21 @@
+# =============================================================================
+# Scores_sim_plot.R
+# =============================================================================
+# DESCRIPTION: Generates score comparison plots for precipitation simulation.
+#
+# DATA REQUIREMENTS:
+# This script requires pre-generated simulation data. Before running this script,
+# you must first run:
+#
+#   source("Manuscript/Section_6/Simulation_precip.R")
+#
+# This will generate the required data files in:
+#   - Manuscript/Section_6/Precip/Results/
+#   - Manuscript/Section_6/Precip/data_sim/
+#
+# WARNING: The Simulation_precip.R script runs 100 loops by default and takes
+# several hours to complete.
+# =============================================================================
 library(ggplot2)
 library(patchwork)
 library(devtools)

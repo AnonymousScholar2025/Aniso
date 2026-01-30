@@ -1,3 +1,16 @@
+# =============================================================================
+# Prior_Posterior_plots.R
+# =============================================================================
+# DESCRIPTION: Generates prior and posterior comparison plots.
+#
+# DATA REQUIREMENTS:
+# This script can either:
+#   1. Load pre-computed data from Manuscript/Section_5/Prior_Posterior_Data/
+#   2. Regenerate data by calling the prior_posterior_plotter functions
+#      (computationally intensive, may take minutes to hours)
+#
+# If the data files are not present, the script will regenerate them.
+# =============================================================================
 library(SPDEaniso)
 library(devtools)
 library(ggplot2)

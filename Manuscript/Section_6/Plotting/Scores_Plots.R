@@ -1,3 +1,20 @@
+# =============================================================================
+# Scores_Plots.R
+# =============================================================================
+# DESCRIPTION: Generates leave-one-out score comparison plots.
+#
+# DATA REQUIREMENTS:
+# This script requires pre-generated simulation data. Before running this script,
+# you must first run:
+#
+#   source("Manuscript/Section_6/Precipitation_loop.R")
+#
+# This will generate the required .RData files in:
+#   - Manuscript/Section_6/Precip/Results/
+#
+# WARNING: The Precipitation_loop.R script is computationally intensive and
+# takes several hours to complete.
+# =============================================================================
 library(ggplot2)
 n_locations <- c(233, 200, 150, 100, 50, 20)
 n_weights <- 1000

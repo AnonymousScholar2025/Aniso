@@ -80,6 +80,18 @@ After all packages are successfully installed, you can reproduce the results fro
 
 > **Note:** If you want to use `SPDEaniso` functions interactively (outside of the provided scripts), you must first load the package with `library(SPDEaniso)`.
 
+> [!IMPORTANT]
+> **Data Generation Requirements:** This repository is submitted **without pre-computed simulation data** to reduce file size. Several plotting scripts depend on data that must be generated first by running the corresponding simulation scripts (which are computationally intensive). See the table below for the data dependencies:
+>
+> | Plotting Script                                      | Required Data Generator                                            | Expected Runtime        |
+> | ---------------------------------------------------- | ------------------------------------------------------------------ | ----------------------- |
+> | `Section_5/Simulation_plots/Plot_map_loop_results.R` | `Section_5/map_loop.R`                                             | ~hours (600 iterations) |
+> | `Section_5/Simulation_plots/Prior_Posterior_plots.R` | Uses `Prior_Posterior_Data/` or regenerates via internal functions | ~minutes to hours       |
+> | `Section_6/Plotting/Scores_sim_plot.R`               | `Section_6/Simulation_precip.R`                                    | ~hours (100 loops)      |
+> | `Section_6/Plotting/Scores_Plots.R`                  | `Section_6/Precipitation_loop.R`                                   | ~hours                  |
+>
+> **To generate the required data:** Run the simulation scripts first (see "Long-Running Simulations" below), then run the plotting scripts.
+
 **Quick Examples (run in seconds):**
 
 ```r

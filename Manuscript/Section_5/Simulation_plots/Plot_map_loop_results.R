@@ -1,6 +1,20 @@
-# In this file we plot the results from the simulation study of different priors for the parameters
-# (log(kappa),v,log(sigma_u),log(sigma_epsilon)) of the anisotropic SPDE
-# That is we plot the distances to the MAP estimate, the lengths of the credible intervals, the probabilities of the true parameter being in the credible interval, the KL divergence, the complexity of the approximation, the K-S test and the k diagnostics.
+# =============================================================================
+# Plot_map_loop_results.R
+# =============================================================================
+# DESCRIPTION: Plots results from the simulation study comparing different priors
+# for the parameters (log(kappa), v, log(sigma_u), log(sigma_epsilon)).
+#
+# DATA REQUIREMENTS:
+# This script requires pre-generated simulation data. If not already generated, you must first run:
+#
+#   source("Manuscript/Section_5/map_loop.R")
+#
+# This will generate the required data files in:
+#   - Manuscript/Section_5/Simulation_Results/
+#
+# WARNING: The map_loop.R script runs 600 iterations by default and takes several
+# hours to complete. To test quickly, reduce `number_of_loops` in map_loop.R.
+# =============================================================================
 library(SPDEaniso)
 library(ggplot2)
 library(dplyr)
