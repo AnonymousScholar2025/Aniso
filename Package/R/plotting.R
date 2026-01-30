@@ -1791,6 +1791,7 @@ plt_weights_cdf <- function(results,
 
 
 
+#' @export
 prior_posterior_plotter <- function(theta_fixed = map_pc$par,
                                     log_priors = log_priors,
                                     log_posteriors = log_posteriors,
